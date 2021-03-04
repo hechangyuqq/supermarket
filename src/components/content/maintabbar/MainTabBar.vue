@@ -1,4 +1,4 @@
-<template>
+<template class="main-tab-bar">
 
   <tab-bar>
     <tab-bar-item path="/home" >
