@@ -1,325 +1,90 @@
 <template>
-  <scroll class="didi">
-    <ul>
-      li1
-    </ul>
-    <ul>
-      li2
-    </ul>
-    <ul>
-      li3
-    </ul>
-    <ul>
-      li4
-    </ul>
-    <ul>
-      li5
-    </ul>
-    <ul>
-      li6
-    </ul>
-    <ul>
-      li7
-    </ul>
-    <ul>
-      li8
-    </ul>
-    <ul>
-      li9
-    </ul>
-    <ul>
-      li10
-    </ul>
-    <ul>
-      li11
-    </ul>
-    <ul>
-      li12
-    </ul>
-    <ul>
-      li13
-    </ul>
-    <ul>
-      li14
-    </ul>
-    <ul>
-      li15
-    </ul>
-    <ul>
-      li16
-    </ul>
-    <ul>
-      li17
-    </ul>
-    <ul>
-      li18
-    </ul>
-    <ul>
-      li19
-    </ul>
-    <ul>
-      li20
-    </ul>
-    <ul>
-      li21
-    </ul>
-    <ul>
-      li22
-    </ul>
-    <ul>
-      li23
-    </ul>
-    <ul>
-      li24
-    </ul>
-    <ul>
-      li25
-    </ul>
-    <ul>
-      li26
-    </ul>
-    <ul>
-      li27
-    </ul>
-    <ul>
-      li28
-    </ul>
-    <ul>
-      li29
-    </ul>
-    <ul>
-      li30
-    </ul>
-    <ul>
-      li31
-    </ul>
-    <ul>
-      li32
-    </ul>
-    <ul>
-      li33
-    </ul>
-    <ul>
-      li34
-    </ul>
-    <ul>
-      li35
-    </ul>
-    <ul>
-      li36
-    </ul>
-    <ul>
-      li37
-    </ul>
-    <ul>
-      li38
-    </ul>
-    <ul>
-      li39
-    </ul>
-    <ul>
-      li40
-    </ul>
-    <ul>
-      li41
-    </ul>
-    <ul>
-      li42
-    </ul>
-    <ul>
-      li43
-    </ul>
-    <ul>
-      li44
-    </ul>
-    <ul>
-      li45
-    </ul>
-    <ul>
-      li46
-    </ul>
-    <ul>
-      li47
-    </ul>
-    <ul>
-      li48
-    </ul>
-    <ul>
-      li49
-    </ul>
-    <ul>
-      li50
-    </ul>
-    <ul>
-      li51
-    </ul>
-    <ul>
-      li52
-    </ul>
-    <ul>
-      li53
-    </ul>
-    <ul>
-      li54
-    </ul>
-    <ul>
-      li55
-    </ul>
-    <ul>
-      li56
-    </ul>
-    <ul>
-      li57
-    </ul>
-    <ul>
-      li58
-    </ul>
-    <ul>
-      li59
-    </ul>
-    <ul>
-      li60
-    </ul>
-    <ul>
-      li61
-    </ul>
-    <ul>
-      li62
-    </ul>
-    <ul>
-      li63
-    </ul>
-    <ul>
-      li64
-    </ul>
-    <ul>
-      li65
-    </ul>
-    <ul>
-      li66
-    </ul>
-    <ul>
-      li67
-    </ul>
-    <ul>
-      li68
-    </ul>
-    <ul>
-      li69
-    </ul>
-    <ul>
-      li70
-    </ul>
-    <ul>
-      li71
-    </ul>
-    <ul>
-      li72
-    </ul>
-    <ul>
-      li73
-    </ul>
-    <ul>
-      li74
-    </ul>
-    <ul>
-      li75
-    </ul>
-    <ul>
-      li76
-    </ul>
-    <ul>
-      li77
-    </ul>
-    <ul>
-      li78
-    </ul>
-    <ul>
-      li79
-    </ul>
-    <ul>
-      li80
-    </ul>
-    <ul>
-      li81
-    </ul>
-    <ul>
-      li82
-    </ul>
-    <ul>
-      li83
-    </ul>
-    <ul>
-      li84
-    </ul>
-    <ul>
-      li85
-    </ul>
-    <ul>
-      li86
-    </ul>
-    <ul>
-      li87
-    </ul>
-    <ul>
-      li88
-    </ul>
-    <ul>
-      li89
-    </ul>
-    <ul>
-      li90
-    </ul>
-    <ul>
-      li91
-    </ul>
-    <ul>
-      li92
-    </ul>
-    <ul>
-      li93
-    </ul>
-    <ul>
-      li94
-    </ul>
-    <ul>
-      li95
-    </ul>
-    <ul>
-      li96
-    </ul>
-    <ul>
-      li97
-    </ul>
-    <ul>
-      li98
-    </ul>
-    <ul>
-      li99
-    </ul>
-    <ul>
-      li100
-    </ul>
+  <scroll class="home-wrapper">
+              <goods-list
+        :goods="showGoods"
+        class="good-list"
+      ></goods-list>
+  ><ul>li110</ul>
+  <ul>li210</ul>
+  <ul>li310</ul>
+  <ul>li410</ul>
+  <ul>li510</ul>
+  <ul>li610</ul>
+  <ul>li710</ul>
+  <ul>li810</ul>
+  <ul>li910</ul>
+  <ul>li1010</ul>
   </scroll>
 </template>
 
 <script>
 import Scroll from "components/common/scroll/Scroll.vue";
+import GoodsList from "components/content/goods/GoodsList.vue";
+// 外部js文件
+import { getHomeMultidata, getHomeGoods } from "@/network/home";
 export default {
   name: "Category",
-  components: { Scroll },
+  components: { Scroll,GoodsList },
+  created() {
+    //1.网络请求相关的方法
+    this.getHomeMultidata();
+    this.getHomeGoods("pop");
+    this.getHomeGoods("new");
+    this.getHomeGoods("sell");
+  },
+  computed:{
+    showGoods(){
+      return this.goods[this.currentType].list
+    }
+  },
+  data() {
+      return {
+        banners: [],
+        recommends: [],
+        goods: {
+          'pop': { page: 0, list: [] },
+          'new': { page: 0, list: [] },
+          'sell': { page: 0, list: [] },
+        },
+        currentType: 'pop',
+      };
+    },
+    methods: {
+    //请求网络数据
+    getHomeMultidata() {
+      getHomeMultidata().then((res) => {
+        //console.log(res)
+        this.banners = res.data.banner.list;
+        this.recommends = res.data.recommend.list;
+      });
+    },
+    getHomeGoods(type) {
+      console.log('正在查询'+type+this.currentType)
+      const page = this.goods[type].page + 1;
+      getHomeGoods(type, page).then((res) => {
+        this.goods[type].list.push(...res.data.list);
+        this.goods[type].page += 1;
+      });
+    },
+  },
+}
 
-};
 </script>
 
 <style scoped>
-.didi{
-  position:absolute;
-  top: 0; 
-  right: 0px;
-  left:0px;
-  height: 200px;
-  background-color : red;
-  overflow: hidden;
+.good-list {
+  margin-bottom: 50px;
 }
+.home-wrapper{
+  
+  position:absolute;
+  top: 44px;
+  bottom: 49px; 
+  right:0px;
+  left: 0px; 
+  /* height: 400px; */
+  overflow: hidden;  
+  height: 200px;
+   background-color: green;
+} 
 </style>

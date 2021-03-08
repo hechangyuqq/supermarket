@@ -17,27 +17,61 @@ export default {
         default() {
           return {};
         }
-      }
+      },
+
     };
   },
+  props: {
+    probeType: {
+      type: Number,
+      default: 0
+    },
+    pullUpLoad:{
+      type:Boolean,
+      default:false
+    }
+  },
   mounted() {
-    this.$nextTick(()=>{
-          this.scroller = new BScroll(this.$refs.wrapper, {
+    this.scroller = new BScroll(this.$refs.wrapper, {
       // probeType:this.probeType,
-      //probeType: 3,
-      scrollY: true,
+      probeType: this.probeType,
       click: true,
       mouseWheel: true,
+      pullUpLoad:this.pullUpLoad,
       //pullUpLoad: true
-    });
-    // console.log( "hasVerticalScroll:"+this.scroller.hasVerticalScroll);
-    // console.log( "scrollerHeight:"+this.scroller.scrollerHeight);
-    // console.log( "wrapperHeight:"+this.scroller.wrapper.wrapperHeight);
-    console.log(this.scroller)
     })
+    if( this.probeType === 2 || this.probeType===3){
+      this.scroller.on("scroll", (position) => {
+      // console.log(position);
+      this.$emit('scroll',position)
+    })
+    }
+
+    if (this.pullUpLoad){
+      this.scroller.on("pullingUp",() => {
+        //console.log('上拉加载更多')
+        this.$emit('pullingUp')
+      })      
+    }
+
+    // console.log( "hasVerticalScroll:"+this.scroller.hasVerticalScroll);
+    // console.log( "scrollerHeight:"+this.rscroller.scrollerHeight);
+    // console.log( "wrapperHeight:"+this.scoller.wrapper.wrapperHeight);
+  },
+  methods: {
+    scrollTo(x, y, time) {
+      this.scroller && this.scroller.scrollTo(x, y, time);
+    },
+    finishPullUp(){
+      this.scroller.finishPullUp()
+    },
+    refresh(){
+      //console.log('----------')
+      this.scroller && this.scroller.refresh();
+    },
 
   }
-}
+};
 </script>
 
 <style></style>
